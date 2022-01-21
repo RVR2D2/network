@@ -82,10 +82,6 @@ a {
   grid-area: content;
   width: 100%;
   max-width: 840px;
-  /* margin: 0 auto; */
-  /* display: grid;
-  grid-auto-flow: row;
-  gap: 30px; */
   margin-bottom: 50px;
   color: #eef2f1;
   border: 1px solid #252525;
