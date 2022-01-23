@@ -1,12 +1,13 @@
+import s from './style.module.css'
 import bg1 from "../../assets/bg1.jpeg";
 
 const Content = () => {
   return (
-    <div className="app-content">
-      <div className="app-bg-img">
+    <div className={s.appContent}>
+      <div className={s.appBgImg}>
         <img src={bg1} alt="bg-img" />
       </div>
-      <div className="app-content-body">
+      <div className={s.appContentBody}>
         <div className="app-avatarBlock">ava + description</div>
         <div className="app-post">
           my post

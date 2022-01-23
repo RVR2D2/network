@@ -1,6 +1,8 @@
+import s from './style.module.css'
+
 const SideBar = () => {
   return (
-    <nav className="app-nav">
+    <nav className={s.appNav}>
       <div>
         <a href="#">Profile</a>
       </div>
