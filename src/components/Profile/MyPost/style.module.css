@@ -1,0 +1,48 @@
+.appPost h3 {
+	color: #768787;
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.appNewPost textarea {
+	position: relative;
+	background: #0d1212;
+	border-radius: 8px;
+	border: 1px solid #252525;
+	color: #768787;
+	font-weight: 500;
+	font-size: 16px;
+	outline: none;
+	display: flex;
+	align-items: center;
+	padding: 15px 25px;
+	width: 90%;
+	min-height: 160px;
+}
+
+.appPostButton {
+	height: 40px;
+	width: 120px;
+	float: right;
+	background: #2aa5a0;;
+	border-radius: 8px;
+	border: 0;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: .1s;
+	z-index: 1;
+	position: relative;
+	bottom: 50px;
+	right: 40px;
+}
+
+.appPostButton:hover {
+	opacity: 0.7;
+	transition: .1s;
+}
+
+.appPostButton:active {
+	transform: translateY(-2px);
+}

@@ -36,3 +36,7 @@ a {
 a:hover {
 	color: #fff;
 }
+
+a.active {
+	color: darkorange;
+}

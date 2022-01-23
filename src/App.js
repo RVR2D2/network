@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
-import Content from "./components/Content";
+import Profile from "./components/Profile";
 import "./App.css";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <div className="app-wrapper">
       <Header />
       <SideBar />
-      <Content />
+      <Profile />
     </div>
   );
 };

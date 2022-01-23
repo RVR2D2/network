@@ -1,0 +1,43 @@
+.post {
+	display: flex;
+	align-items: center;
+	margin: 20px 0 15px;
+	contain: content;
+}
+
+.post button {
+	display: grid;
+	align-items: center;
+	background: 0 0;
+	border: 1.5px solid #0d1212;
+	border-radius: 50px;
+	background-color: #181d1c;
+	cursor: pointer;
+	transition: box-shadow .25s ease;
+	grid-auto-flow: column;
+	gap: 2px;
+	font-family: inherit;
+	font-size: 13px;
+}
+
+button:active {
+	transform: translateY(-2px);
+}
+
+.post img {
+	border-radius: 50%;
+	min-width: 110px;
+	width: 110px;
+	min-height: 110px;
+	height: 110px;
+	margin: 0 28px 0 0;
+}
+
+.contentPost {
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 19px;
+	margin: 0;
+	letter-spacing: 0;
+	color: #c5d3d3;
+}
