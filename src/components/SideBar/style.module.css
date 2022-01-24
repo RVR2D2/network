@@ -9,7 +9,7 @@
 	margin-top: 20px;
 }
 
-a {
+.link a {
 	display: grid;
 	justify-content: start;
 	align-items: center;
@@ -33,10 +33,6 @@ a {
 	padding-left: 20px;
 }
 
-a:hover {
-	color: #fff;
-}
-
-a.active {
+.link .active {
 	color: darkorange;
 }
