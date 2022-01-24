@@ -5,8 +5,7 @@
 	contain: content;
 }
 
-.post button {
-	display: grid;
+button {
 	align-items: center;
 	background: 0 0;
 	border: 1.5px solid #0d1212;
@@ -14,10 +13,9 @@
 	background-color: #181d1c;
 	cursor: pointer;
 	transition: box-shadow .25s ease;
-	grid-auto-flow: column;
-	gap: 2px;
 	font-family: inherit;
 	font-size: 13px;
+	color: #fff;
 }
 
 button:active {
