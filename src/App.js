@@ -10,8 +10,8 @@ const App = () => {
     <div className='app-wrapper'>
       <Header />
       <SideBar />
-      <Route path='/dialogs' component={Dialogs}/> 
-      <Route path='/profile' component={Profile}/>
+      <Route exact path='/dialogs' component={Dialogs}/>
+      <Route exact path='/profile' component={Profile}/>
     </div>
   );
 };
