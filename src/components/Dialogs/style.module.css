@@ -15,32 +15,8 @@
 	padding: 20px;
 }
 
-.dialogsItems {
-}
-
-.dialogsItemsItem {
-	padding-bottom: 10px;
-}
-
-a {
-	color: #eef2f1;
-	fill: #eef2f1;
-	text-decoration: none;
-}
-
-.messages {
-}
-
-.messagesItem {
-	padding-bottom: 10px;
-}
-
 h3 {
 	padding-bottom: 5px;
 	width: 100px;
 	border-bottom: 2px solid #b82e1f;
-}
-
-.active {
-	color: darkorange;
 }

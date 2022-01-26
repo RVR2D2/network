@@ -2,6 +2,19 @@ import s from './style.module.css';
 import Post from './Post';
 
 const MyPost = () => {
+  const posts = [
+    {
+      message: 'Test',
+      like: 12,
+      id: 1
+    },
+    {
+      message: 'Test2',
+      like: 1,
+      id: 2
+    }
+  ];
+  
   return (
     <div className={s.appPost}>
       <h3>my post</h3>
@@ -10,18 +23,15 @@ const MyPost = () => {
         <button className={s.appPostButton}>Send</button>
       </div>
       <div>
-        <Post
-          message='How to lern ReactJS'
-          like={12}
-        />
-        <Post
-          message='How to lern AngularJS'
-          like={11}
-        />
-        <Post
-          message='How to lern NodeJS'
-          like={22}
-        />
+        {
+          posts && posts.map((item) => (
+            <Post
+              key={item.id}
+              message={item.message}
+              like={item.like}
+            />
+          ))
+        }
       </div>
     </div>
   );

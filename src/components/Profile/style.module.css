@@ -14,11 +14,3 @@
 .appContentBody {
 	padding: 20px;
 }
-
-.appBgImg img {
-	width: 100%;
-	max-width: 840px;
-	object-fit: cover;
-	border-top-left-radius: 18px;
-	border-top-right-radius: 18px;
-}

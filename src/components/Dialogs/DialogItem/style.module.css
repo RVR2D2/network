@@ -1,0 +1,13 @@
+.dialogsItemsItem {
+	padding-bottom: 10px;
+}
+
+.active {
+	color: darkorange;
+}
+
+a {
+	color: #eef2f1;
+	fill: #eef2f1;
+	text-decoration: none;
+}
