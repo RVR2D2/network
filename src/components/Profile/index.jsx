@@ -3,12 +3,13 @@ import bg1 from '../../assets/bg1.jpeg';
 import MyPost from './MyPost/MyPost';
 import ProfileInfo from './ProfileInfo';
 
-const Profile = () => {
+const Profile = ({ posts }) => {
+
   return (
     <div className={s.appContent}>
       <ProfileInfo img={bg1}/>
       <div className={s.appContentBody}>
-        <MyPost />
+        <MyPost posts={posts} />
       </div>
     </div>
   );
