@@ -2,9 +2,8 @@ import s from './style.module.css';
 import bg1 from '../../assets/bg1.jpeg';
 import MyPost from './MyPost/MyPost';
 import ProfileInfo from './ProfileInfo';
-import {updateNewPostText} from "../../redux/state";
 
-const Profile = ({ posts, addPost, newPostText, updateNewPostText }) => {
+const Profile = ({ posts, addPost, newPostText, dispatch }) => {
 
   return (
     <div className={s.appContent}>
@@ -13,7 +12,7 @@ const Profile = ({ posts, addPost, newPostText, updateNewPostText }) => {
         <MyPost
           posts={posts}
           addPost={addPost}
-          updateNewPostText={updateNewPostText}
+          dispatch={dispatch}
           newPostText={newPostText} />
       </div>
     </div>

@@ -4,9 +4,8 @@ import SideBar from './components/SideBar';
 import Profile from './components/Profile';
 import './App.css';
 import Dialogs from './components/Dialogs';
-import {updateNewPostText} from "./redux/state";
 
-const App = ({state, addPost ,updateNewPostText}) => {
+const App = ({state, dispatch}) => {
   return (
     <div className='app-wrapper'>
       <Header/>
@@ -24,8 +23,7 @@ const App = ({state, addPost ,updateNewPostText}) => {
         path='/profile'
         render={() => <Profile
           posts={state.profilePage.posts}
-          updateNewPostText={updateNewPostText}
-          addPost={addPost}
+          dispatch={dispatch}
           newPostText={state.profilePage.newPostText}
         />}
       />
