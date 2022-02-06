@@ -2,33 +2,28 @@ import React from "react";
 import s from "./style.module.css";
 import Post from "./Post";
 import TextArea from "../../TextArea";
+import Button from "../../Button";
 
 import {
-  addPostActionCreator,
+  addPostCreator,
   updateNewPostTextActionCreator,
 } from "../../../redux/state";
 
 const MyPost = ({ posts, newPostText, dispatch }) => {
-  const newPostEl = React.createRef();
-
   const handleClick = () => {
-    dispatch(addPostActionCreator());
+    dispatch(addPostCreator());
   };
 
-  const onPostChange = () => {
-    let text = newPostEl.current.value;
-    let action = updateNewPostTextActionCreator(text);
-    dispatch(action);
+  const onPostChange = (e) => {
+    const text = e.target.value;
+    dispatch(updateNewPostTextActionCreator(text));
   };
 
   return (
     <div className={s.appPost}>
       <h3>my post</h3>
-      <TextArea ref={newPostEl} onChange={onPostChange} value={newPostText} />
-
-      <button className={s.appPostButton} onClick={handleClick}>
-        Send
-      </button>
+      <TextArea onChange={onPostChange} value={newPostText} />
+      <Button onClick={handleClick} text="Send" />
       <div>
         {posts.length === 0 ? (
           <i

@@ -1,0 +1,26 @@
+.appPostButton {
+  height: 40px;
+  width: 120px;
+  float: right;
+  background: #2aa5a0;
+  border-radius: 8px;
+  border: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.1s;
+  z-index: 1;
+  position: relative;
+  bottom: 50px;
+  right: 40px;
+}
+
+.appPostButton:hover {
+  opacity: 0.7;
+  transition: 0.1s;
+}
+
+.appPostButton:active {
+  transform: translateY(-2px);
+}
