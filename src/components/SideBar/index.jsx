@@ -1,15 +1,18 @@
-import { NavLink } from 'react-router-dom';
-import s from './style.module.css';
+import { NavLink } from "react-router-dom";
+import s from "./style.module.css";
 
 const SideBar = () => {
-  
   return (
     <nav className={s.appNav}>
       <div className={s.link}>
-        <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
+        <NavLink to="/profile" activeClassName={s.active}>
+          Profile
+        </NavLink>
       </div>
       <div className={s.link}>
-        <NavLink to='/dialogs' activeClassName={s.active}>Message</NavLink>
+        <NavLink to="/dialogs" activeClassName={s.active}>
+          Message
+        </NavLink>
       </div>
       {/*<div>*/}
       {/*  <Link className={s.link}>News</Link>*/}
