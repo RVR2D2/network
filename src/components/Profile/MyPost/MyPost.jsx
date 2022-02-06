@@ -2,17 +2,21 @@ import React from "react";
 import s from "./style.module.css";
 import Post from "./Post";
 
-const MyPost = ({posts, newPostText, dispatch}) => {
+import {
+  addPostActionCreator,
+  updateNewPostTextActionCreator,
+} from "../../../redux/state";
 
+const MyPost = ({ posts, newPostText, dispatch }) => {
   const newPostEl = React.createRef();
 
   const handleClick = () => {
-    dispatch({ type: 'ADD-POST' });
+    dispatch(addPostActionCreator());
   };
 
   const onPostChange = () => {
     let text = newPostEl.current.value;
-    let action = { type: 'UPDATE-NEW-POST-TEXT', newText: text};
+    let action = updateNewPostTextActionCreator(text);
     dispatch(action);
   };
 
@@ -26,18 +30,23 @@ const MyPost = ({posts, newPostText, dispatch}) => {
           onChange={onPostChange}
           value={newPostText}
         />
-        <button
-          className={s.appPostButton}
-          onClick={handleClick}
-        >Send
+        <button className={s.appPostButton} onClick={handleClick}>
+          Send
         </button>
       </div>
       <div>
-        {posts.length === 0 ? <i
-          style={{textAlign: 'center', display: 'block', marginTop: '20px'}}>Пока постов нету</i> : '' ||
+        {posts.length === 0 ? (
+          <i
+            style={{ textAlign: "center", display: "block", marginTop: "20px" }}
+          >
+            Пока постов нету
+          </i>
+        ) : (
+          "" ||
           posts.map((item) => (
-            <Post key={item.id} message={item.message} like={item.like}/>
-          ))}
+            <Post key={item.id} message={item.message} like={item.like} />
+          ))
+        )}
       </div>
     </div>
   );
