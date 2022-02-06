@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./style.module.css";
 import Post from "./Post";
+import TextArea from "../../TextArea";
 
 import {
   addPostActionCreator,
@@ -23,17 +24,11 @@ const MyPost = ({ posts, newPostText, dispatch }) => {
   return (
     <div className={s.appPost}>
       <h3>my post</h3>
-      <div className={s.appNewPost}>
-        <textarea
-          placeholder="Comments…"
-          ref={newPostEl}
-          onChange={onPostChange}
-          value={newPostText}
-        />
-        <button className={s.appPostButton} onClick={handleClick}>
-          Send
-        </button>
-      </div>
+      <TextArea ref={newPostEl} onChange={onPostChange} value={newPostText} />
+
+      <button className={s.appPostButton} onClick={handleClick}>
+        Send
+      </button>
       <div>
         {posts.length === 0 ? (
           <i
