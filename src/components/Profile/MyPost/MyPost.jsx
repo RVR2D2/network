@@ -7,7 +7,7 @@ import Button from "../../Button";
 import {
   addPostCreator,
   updateNewPostTextActionCreator,
-} from "../../../redux/state";
+} from "../../../redux/reducers/profile-reducer";
 
 const MyPost = ({ posts, newPostText, dispatch }) => {
   const handleClick = () => {
