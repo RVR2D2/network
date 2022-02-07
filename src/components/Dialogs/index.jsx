@@ -8,7 +8,7 @@ import Button from "../Button";
 import {
   sendMessageCreator,
   updateNewMessageBodyCreator,
-} from "../../redux/state";
+} from "../../redux/reducers/dialog-reducer";
 
 const Dialogs = ({ store }) => {
   let state = store.getState().dialogsPage;
