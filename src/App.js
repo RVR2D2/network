@@ -1,19 +1,19 @@
-import { Route } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 import Profile from './components/Profile';
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import './App.css';
-import Dialogs from './components/Dialogs';
 
-const App = ({ state, dispatch, store }) => {
+const App = ({store}) => {
   return (
     <div className='app-wrapper'>
-      <Header />
-      <SideBar />
+      <Header/>
+      <SideBar/>
       <Route
         exact
         path='/dialogs'
-        render={() => <Dialogs
+        render={() => <DialogsContainer
           store={store}
         />}
       />
@@ -21,9 +21,7 @@ const App = ({ state, dispatch, store }) => {
         exact
         path='/profile'
         render={() => <Profile
-          posts={state.profilePage.posts}
-          dispatch={dispatch}
-          newPostText={state.profilePage.newPostText}
+          store={store}
         />}
       />
     </div>

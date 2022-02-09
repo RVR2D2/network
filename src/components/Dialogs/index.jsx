@@ -5,21 +5,16 @@ import DialogMessage from "./DialogMessage";
 import TextArea from "../TextArea";
 import Button from "../Button";
 
-import {
-  sendMessageCreator,
-  updateNewMessageBodyCreator,
-} from "../../redux/reducers/dialog-reducer";
-
-const Dialogs = ({ store }) => {
-  let state = store.getState().dialogsPage;
+const Dialogs = (props) => {
+  let state = props.dialogsPage;
 
   const handleClick = () => {
-    store.dispatch(sendMessageCreator());
+    props.sendMessage();
   };
 
   const onMessageChange = (e) => {
     const body = e.target.value;
-    store.dispatch(updateNewMessageBodyCreator(body));
+    props.updateNewMessageBody(body);
   };
 
   return (
