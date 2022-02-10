@@ -5,7 +5,7 @@ import Profile from './components/Profile';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import './App.css';
 
-const App = ({store}) => {
+const App = () => {
   return (
     <div className='app-wrapper'>
       <Header/>
@@ -13,16 +13,12 @@ const App = ({store}) => {
       <Route
         exact
         path='/dialogs'
-        render={() => <DialogsContainer
-          store={store}
-        />}
+        render={() => <DialogsContainer/>}
       />
       <Route
         exact
         path='/profile'
-        render={() => <Profile
-          store={store}
-        />}
+        render={() => <Profile/>}
       />
     </div>
   );
