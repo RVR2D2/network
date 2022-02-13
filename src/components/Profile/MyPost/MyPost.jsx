@@ -5,6 +5,7 @@ import TextArea from "../../TextArea";
 import Button from "../../Button";
 
 const MyPost = (props) => {
+  console.log(props)
   const onHandleClick = () => {
     props.addPost();
   };
@@ -17,19 +18,19 @@ const MyPost = (props) => {
   return (
     <div className={s.appPost}>
       <h3>my post</h3>
-      <TextArea onChange={onPostChange} value={props.newPostText} />
-      <Button onClick={onHandleClick} text="Send" />
+      <TextArea onChange={onPostChange} value={props.newPostText}/>
+      <Button onClick={onHandleClick} text="Send"/>
       <div>
         {props.posts.length === 0 ? (
           <i
-            style={{ textAlign: "center", display: "block", marginTop: "20px" }}
+            style={{textAlign: "center", display: "block", marginTop: "20px"}}
           >
             Пока постов нету
           </i>
         ) : (
           "" ||
           props.posts.map((item) => (
-            <Post key={item.id} message={item.message} like={item.like} />
+            <Post key={item.id} message={item.message} like={item.like}/>
           ))
         )}
       </div>
