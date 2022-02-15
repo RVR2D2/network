@@ -1,0 +1,69 @@
+.users {
+    /*grid-area: content;*/
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    /*column-gap: 20px;*/
+    width: 100%;
+    max-width: 840px;
+    margin-bottom: 50px;
+    color: #eef2f1;
+    border: 1px solid #252525;
+    border-radius: 18px;
+    background-color: #181d1c;
+    fill: #eef2f1;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+h3 {
+    padding-bottom: 5px;
+    width: 100px;
+    border-bottom: 2px solid #b82e1f;
+}
+
+.usersWrapper {
+    display: flex;
+    margin-top: 20px;
+}
+.userPhoto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+span {
+    color: #e5e5e5;
+    font-size: 13px;
+    padding-right: 5px;
+}
+
+.usersInfo {
+    margin-left: 20px;
+}
+
+.usersInfoStatus {
+    margin-top: 10px;
+}
+
+.bio {
+    display: block;
+    padding-top: 20px;
+}
+
+.usersLocation {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.usersCity {
+    margin-top: 10px;
+}
+
+.usersBtn {
+    margin-top: 20px;
+}
+
+.usersBtn > button {
+    bottom: 0 !important;
+    right: 30px !important;
+}
