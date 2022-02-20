@@ -5,18 +5,21 @@ import axios from "axios";
 import imgMocUser from "../../assets/users.png";
 
 const Users = (props) => {
-  if (props.users.length === 0) {
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((response) => {
-        props.setUsers(response.data.items);
-      });
-  }
+  const getUsers = () => {
+    if (props.users.length === 0) {
+      axios
+        .get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((response) => {
+          props.setUsers(response.data.items);
+        });
+    }
+  };
 
   return (
     <div className={s.users}>
       <h3>Users</h3>
       <div>
+        <Button onClick={getUsers} text="Get users" />
         {Array.isArray(props.users) &&
           props.users.map((u) => (
             <div className={s.usersWrapper} key={u.id}>
