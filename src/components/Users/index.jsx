@@ -7,7 +7,9 @@ import s from "./style.module.css";
 import imgMocUser from "../../assets/users.png";
 
 class Users extends React.Component {
-  getUsers = () => {
+  constructor(props) {
+    super(props);
+
     if (this.props.users.length === 0) {
       axios
         .get("https://social-network.samuraijs.com/api/1.0/users")
@@ -15,14 +17,13 @@ class Users extends React.Component {
           this.props.setUsers(response.data.items);
         });
     }
-  };
+  }
 
   render() {
     return (
       <div className={s.users}>
         <h3>Users</h3>
         <div>
-          <Button onClick={this.getUsers} text="Get users" />
           {Array.isArray(this.props.users) &&
             this.props.users.map((u) => (
               <div className={s.usersWrapper} key={u.id}>
