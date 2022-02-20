@@ -14,6 +14,11 @@ const SideBar = () => {
           Message
         </NavLink>
       </div>
+      <div className={s.link}>
+        <NavLink to="/users" activeClassName={s.active}>
+          Users
+        </NavLink>
+      </div>
       {/*<div>*/}
       {/*  <Link className={s.link}>News</Link>*/}
       {/*</div>*/}
