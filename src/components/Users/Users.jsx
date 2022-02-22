@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
+import Preloader from "../Preloader";
 
 import s from "./style.module.css";
 import imgMocUser from "../../assets/users.png";
@@ -16,6 +17,7 @@ const Users = (props) => {
   return (
     <div className={s.users}>
       <h3>Users</h3>
+      {props.isFetching ? <Preloader /> : null}
       <div className={s.paginate}>
         {Array.isArray(pages) &&
           pages.map((page) => (
