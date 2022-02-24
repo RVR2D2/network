@@ -1,19 +1,21 @@
 import s from './style.module.css'
 import Preloader from "../../Preloader";
+import imgMocUser from "../../../assets/users.png";
 
-const ProfileInfo = ({profile, img }) => {
+const ProfileInfo = ({profile, img}) => {
   if (!profile) {
-    return <Preloader />
+    return <Preloader/>
   }
 
   return (
     <div>
       <div className={s.appBgImg}>
-        <img src={img} alt='bg-img' />
+        <img src={img} alt='bg-img'/>
       </div>
       <div className={s.appAvatarBlock} style={{display: "flex"}}>
-        <img src={profile.photos.large} alt/>
+        <img src={profile.photos.large === null ? imgMocUser : profile.photos.large} alt/>
         <div style={{paddingLeft: '20px'}}>
+          <p>{profile.fullName}</p>
           <p>{profile.aboutMe}</p>
           <p>{profile.contacts.facebook}</p>
           <p>{profile.contacts.website}</p>
@@ -25,7 +27,6 @@ const ProfileInfo = ({profile, img }) => {
           <p>{profile.contacts.mainLink}</p>
           <p>{profile.lookingForAJob}</p>
           <p>{profile.lookingForAJobDescription}</p>
-          <p>{profile.fullName}</p>
         </div>
       </div>
     </div>
