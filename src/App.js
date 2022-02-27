@@ -1,15 +1,16 @@
 import {Route} from 'react-router-dom';
-import Header from './components/Header';
+import './App.css';
+
+import HeaderContainer from "./components/Header/headerContainer";
 import SideBar from './components/SideBar';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import './App.css';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = () => {
   return (
     <div className='app-wrapper'>
-      <Header/>
+      <HeaderContainer/>
       <SideBar/>
       <Route
         path='/dialogs'
