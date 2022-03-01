@@ -4,7 +4,6 @@ import s from './style.module.css'
 import logo from "../../assets/og.png";
 
 const Header = (props) => {
-  debugger
   return (
     <div className={s.appContainerHeader}>
       <header className={s.appHeader}>
