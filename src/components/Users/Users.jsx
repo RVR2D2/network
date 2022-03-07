@@ -7,6 +7,7 @@ import Preloader from "../Preloader";
 import s from "./style.module.css";
 import imgMocUser from "../../assets/users.png";
 import axios from "axios";
+import {toggleFollowingProgress} from "../../redux/reducers/users-reducer";
 
 const Users = (props) => {
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -43,7 +44,9 @@ const Users = (props) => {
           </div>
           <div className={s.usersBtn}>
             {u.followed ? (<Button
+              disabled={props.followingInProgress.some(id => id === u.id)}
               onClick={() => {
+                props.toggleFollowingProgress(true, u.id);
                 axios
                   .delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                     {
@@ -54,11 +57,14 @@ const Users = (props) => {
                     if (response.data.resultCode === 0) {
                       props.unfollow(u.id);
                     }
+                    props.toggleFollowingProgress(false, u.id);
                   });
               }}
               text="UnFollow"
             />) : (<Button
+              disabled={props.followingInProgress.some(id => id === u.id)}
               onClick={() => {
+                props.toggleFollowingProgress(true, u.id);
                 axios
                   .post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
                     {
@@ -69,6 +75,7 @@ const Users = (props) => {
                     if (response.data.resultCode === 0) {
                       props.follow(u.id);
                     }
+                    props.toggleFollowingProgress(false, u.id);
                   });
               }}
               text="Follow"
