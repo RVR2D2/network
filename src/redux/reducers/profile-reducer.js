@@ -54,12 +54,10 @@ export const setUserProfile = (profile) => ({
   profile,
 });
 
-export const profileThunk = (userId) => {
-  return (dispatch) => {
-    usersApi.profile(userId).then((response) => {
-      dispatch(setUserProfile(response.data));
-    });
-  };
+export const profileThunk = (userId) => (dispatch) => {
+  usersApi.profile(userId).then((response) => {
+    dispatch(setUserProfile(response.data));
+  });
 };
 
 export default profileReducer;

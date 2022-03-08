@@ -2,10 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Profile from "./index";
-import {
-  profileThunk,
-  setUserProfile,
-} from "../../redux/reducers/profile-reducer";
+import { profileThunk } from "../../redux/reducers/profile-reducer";
 import { withRouter } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
@@ -29,6 +26,6 @@ const mapStateToProps = (state) => {
 };
 
 const WithUrlComponentContainer = withRouter(ProfileContainer);
-export default connect(mapStateToProps, { setUserProfile, profileThunk })(
+export default connect(mapStateToProps, { profileThunk })(
   WithUrlComponentContainer
 );

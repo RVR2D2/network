@@ -20,10 +20,13 @@ export const usersApi = {
   unfollow(userId) {
     return instance.delete(`follow/${userId}`);
   },
-  authMe() {
-    return instance.get(`auth/me`);
-  },
   profile(userId) {
     return instance.get(`profile/${userId}`);
+  },
+};
+
+export const authApi = {
+  authMe() {
+    return instance.get(`auth/me`);
   },
 };
