@@ -1,14 +1,15 @@
-import s from './style.module.css';
-import bg1 from '../../assets/bg1.jpeg';
-import ProfileInfo from './ProfileInfo';
+import s from "./style.module.css";
+import bg1 from "../../assets/bg1.jpeg";
+import ProfileInfo from "./ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
+import React from "react";
 
 const Profile = (props) => {
   return (
     <div className={s.appContent}>
-      <ProfileInfo profile={props.profile} img={bg1}/>
+      <ProfileInfo profile={props.profile} img={bg1} />
       <div className={s.appContentBody}>
-        <MyPostContainer/>
+        <MyPostContainer />
       </div>
     </div>
   );
