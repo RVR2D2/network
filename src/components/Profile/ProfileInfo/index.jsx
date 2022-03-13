@@ -1,20 +1,25 @@
-import s from './style.module.css'
+import s from "./style.module.css";
 import Preloader from "../../Preloader";
 import imgMocUser from "../../../assets/users.png";
 
-const ProfileInfo = ({profile, img}) => {
+import ProfileStatus from "./ProfileStatus";
+
+const ProfileInfo = ({ profile, img }) => {
   if (!profile) {
-    return <Preloader/>
+    return <Preloader />;
   }
 
   return (
     <div>
-      <div className={s.appBgImg}>
-        <img src={img} alt='bg-img'/>
-      </div>
-      <div className={s.appAvatarBlock} style={{display: "flex"}}>
-        <img src={profile.photos.large === null ? imgMocUser : profile.photos.large} alt/>
-        <div style={{paddingLeft: '20px'}}>
+      <div className={s.appBgImg}>{/*<img src={img} alt='bg-img'/>*/}</div>
+      <div className={s.appAvatarBlock} style={{ display: "flex" }}>
+        <img
+          src={
+            profile.photos.large === null ? imgMocUser : profile.photos.large
+          }
+          alt={profile.fullName}
+        />
+        <div style={{ paddingLeft: "20px" }}>
           <p>{profile.fullName}</p>
           <p>{profile.aboutMe}</p>
           <p>{profile.contacts.facebook}</p>
@@ -27,6 +32,7 @@ const ProfileInfo = ({profile, img}) => {
           <p>{profile.contacts.mainLink}</p>
           <p>{profile.lookingForAJob}</p>
           <p>{profile.lookingForAJobDescription}</p>
+          <ProfileStatus status={"Online"} />
         </div>
       </div>
     </div>

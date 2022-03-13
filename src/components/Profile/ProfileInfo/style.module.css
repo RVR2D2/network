@@ -10,3 +10,7 @@
 .appAvatarBlock {
 	padding: 20px;
 }
+
+.statusMode {
+	cursor: pointer;
+}
