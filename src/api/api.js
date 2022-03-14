@@ -21,7 +21,20 @@ export const usersApi = {
     return instance.delete(`follow/${userId}`);
   },
   profile(userId) {
+    console.warn("Obsolute method, Please profileApi object.");
+    return profileApi.profile(userId);
+  },
+};
+
+export const profileApi = {
+  profile(userId) {
     return instance.get(`profile/${userId}`);
+  },
+  getStatus(userId) {
+    return instance.get(`profile/status/${userId}`);
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, { status: status });
   },
 };
 

@@ -7,7 +7,12 @@ import React from "react";
 const Profile = (props) => {
   return (
     <div className={s.appContent}>
-      <ProfileInfo profile={props.profile} img={bg1} />
+      <ProfileInfo
+        profile={props.profile}
+        status={props.status}
+        updateStatusThunk={props.updateStatusThunk}
+        img={bg1}
+      />
       <div className={s.appContentBody}>
         <MyPostContainer />
       </div>

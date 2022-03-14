@@ -4,7 +4,7 @@ import imgMocUser from "../../../assets/users.png";
 
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = ({ profile, img }) => {
+const ProfileInfo = ({ profile, status, updateStatusThunk, img }) => {
   if (!profile) {
     return <Preloader />;
   }
@@ -32,7 +32,10 @@ const ProfileInfo = ({ profile, img }) => {
           <p>{profile.contacts.mainLink}</p>
           <p>{profile.lookingForAJob}</p>
           <p>{profile.lookingForAJobDescription}</p>
-          <ProfileStatus status={"Online"} />
+          <ProfileStatus
+            status={status}
+            updateStatusThunk={updateStatusThunk}
+          />
         </div>
       </div>
     </div>
