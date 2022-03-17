@@ -10,3 +10,39 @@
     margin-top: 20px;
     padding: 20px;
 }
+
+button {
+    float: none !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    top: 10px;
+}
+
+.form {
+    display: flex;
+}
+
+.formControl {
+    display: flex;
+    margin-top: 10px;
+}
+
+input {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 8px;
+    line-height: 2;
+    cursor: pointer;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    border: 3px solid #EAEAEA;
+}
+
+input:hover {
+    border-color: #494949;
+}
