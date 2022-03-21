@@ -3,6 +3,8 @@ import style from "./style.module.css";
 
 import Button from "../Button";
 import { Field, reduxForm } from "redux-form";
+import { Input } from "../FormsControl";
+import { required } from "../../utils/validators";
 
 const LoginForm = (props) => {
   return (
@@ -13,9 +15,10 @@ const LoginForm = (props) => {
             <label htmlFor="login">Login</label>
             <Field
               name="login"
-              component="input"
+              component={Input}
+              validate={[required]}
               type="text"
-              placeholder="Typing..."
+              placeholder="Login..."
             />
           </div>
           <div>
@@ -23,9 +26,10 @@ const LoginForm = (props) => {
             <Field
               style={{ marginLeft: "20px" }}
               name="password"
-              component="input"
+              component={Input}
+              validate={[required]}
               type="password"
-              placeholder="Typing..."
+              placeholder="Password..."
             />
           </div>
         </div>
