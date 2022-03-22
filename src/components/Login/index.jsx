@@ -1,30 +1,32 @@
 import React from "react";
-import style from "./style.module.css";
+import { connect } from "react-redux";
+import { login } from "../../redux/reducers/auth-reducer";
 
+import style from "./style.module.css";
 import Button from "../Button";
 import { Field, reduxForm } from "redux-form";
 import { Input } from "../FormsControl";
 import { required } from "../../utils/validators";
+import Redirect from "react-router-dom/es/Redirect";
 
 const LoginForm = (props) => {
   return (
     <>
-      <form onSubmit={props.handleSubmit}>
-        <div className={style.form}>
+      <form className={style.form} onSubmit={props.handleSubmit}>
+        <div>
           <div>
-            <label htmlFor="login">Login</label>
+            <label htmlFor="Email">Email</label>
             <Field
-              name="login"
+              name="email"
               component={Input}
               validate={[required]}
               type="text"
               placeholder="Login..."
             />
           </div>
-          <div>
+          <div style={{ marginTop: "20px" }}>
             <label htmlFor="password">Password</label>
             <Field
-              style={{ marginLeft: "20px" }}
               name="password"
               component={Input}
               validate={[required]}
@@ -35,10 +37,10 @@ const LoginForm = (props) => {
         </div>
         <div className={style.formControl}>
           <div>
-            <label htmlFor="rememberMe">remember me</label>
             <Field name="rememberMe" component="input" type="checkbox" />
+            <label htmlFor="rememberMe">remember me</label>
           </div>
-          <div style={{ marginLeft: "160px" }}>
+          <div>
             <Button text="Login" />
           </div>
         </div>
@@ -51,11 +53,12 @@ const LoginReduxForm = reduxForm({
   form: "login",
 })(LoginForm);
 
-const Login = () => {
+const Login = (props) => {
   const onSubmit = (formData) => {
-    console.log(formData);
+    props.login(formData.email, formData.password, formData.rememberMe);
   };
 
+  if (props.isAuth) return <Redirect to={"/profile"} />;
   return (
     <div className={style.login}>
       <h1>Login</h1>
@@ -64,4 +67,9 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(
+  (state) => ({
+    isAuth: state.auth.isAuth,
+  }),
+  { login }
+)(Login);

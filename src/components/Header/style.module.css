@@ -28,4 +28,14 @@
 
 .appLogin p {
 	color: #fff;
+	margin: 0;
+}
+
+.button {
+	padding: 10px;
+}
+
+.button:hover {
+	transition: 0.5s;
+	opacity: .6;
 }
