@@ -6,3 +6,9 @@
 .formControl.error, h4 {
     color: darkred !important;
 }
+
+.formSummaryError {
+    color: #b82e1f;
+    padding-top: 10px;
+    font-weight: bold;
+}

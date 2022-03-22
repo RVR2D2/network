@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { login } from "../../redux/reducers/auth-reducer";
 
 import style from "./style.module.css";
+import s from "../FormsControl/style.module.css";
 import Button from "../Button";
 import { Field, reduxForm } from "redux-form";
 import { Input } from "../FormsControl";
@@ -40,6 +41,9 @@ const LoginForm = (props) => {
             <Field name="rememberMe" component="input" type="checkbox" />
             <label htmlFor="rememberMe">remember me</label>
           </div>
+          {props.error && (
+            <div className={s.formSummaryError}>{props.error}</div>
+          )}
           <div>
             <Button text="Login" />
           </div>
