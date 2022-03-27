@@ -5,7 +5,7 @@ import s from "./style.module.css";
 import Post from "./Post";
 import PostFrom from "./PostFrom";
 
-const MyPost = (props) => {
+const MyPost = React.memo((props) => {
   const onSubmit = (formData) => {
     props.addPost(formData.newPostText);
   };
@@ -30,7 +30,7 @@ const MyPost = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const AddNewPostForm = reduxForm({ form: "ProfileAddNewPostForm" })(PostFrom);
 
