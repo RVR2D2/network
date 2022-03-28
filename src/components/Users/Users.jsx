@@ -6,9 +6,20 @@ import Preloader from "../Preloader";
 
 import s from "./style.module.css";
 import imgMocUser from "../../assets/users.png";
+import UsersPaginate from "../Paginate/UsersPaginate";
 
-const Users = (props) => {
-  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+const Users = ({
+  currentPage,
+  totalUsersCount,
+  pageSize,
+  handleClickPageChanged,
+  users,
+  followingInProgress,
+  unfollow,
+  follow,
+  isFetching,
+}) => {
+  const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const pages = [];
 
   for (let i = 1; i <= pagesCount; i++) {
@@ -18,23 +29,16 @@ const Users = (props) => {
   return (
     <div className={s.users}>
       <h3>Users</h3>
-      {props.isFetching ? <Preloader /> : null}
-      <div className={s.paginate}>
-        {Array.isArray(pages) &&
-          pages.map((page) => (
-            <span
-              className={props.currentPage === page && s.padinateSelected}
-              onClick={() => {
-                props.handleClickPageChanged(page);
-              }}
-            >
-              {page}
-            </span>
-          ))}
-      </div>
+      {isFetching ? <Preloader /> : null}
+      <UsersPaginate
+        currentPage={currentPage}
+        handleClickPageChanged={handleClickPageChanged}
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+      />
       <div>
-        {Array.isArray(props.users) &&
-          props.users.map((u) => (
+        {Array.isArray(users) &&
+          users.map((u) => (
             <div className={s.usersWrapper} key={u.id}>
               <div>
                 <div>
@@ -49,21 +53,17 @@ const Users = (props) => {
                 <div className={s.usersBtn}>
                   {u.followed ? (
                     <Button
-                      disabled={props.followingInProgress.some(
-                        (id) => id === u.id
-                      )}
+                      disabled={followingInProgress.some((id) => id === u.id)}
                       onClick={() => {
-                        props.unfollow(u.id);
+                        unfollow(u.id);
                       }}
                       text="UnFollow"
                     />
                   ) : (
                     <Button
-                      disabled={props.followingInProgress.some(
-                        (id) => id === u.id
-                      )}
+                      disabled={followingInProgress.some((id) => id === u.id)}
                       onClick={() => {
-                        props.follow(u.id);
+                        follow(u.id);
                       }}
                       text="Follow"
                     />
@@ -85,11 +85,9 @@ const Users = (props) => {
                   <div>
                     <span>country:</span>
                   </div>
-                  {/*<div><span>country</span> {u.location.country}</div>*/}
                   <div className={s.usersCity}>
                     <span>city:</span>
                   </div>
-                  {/*<div className={s.usersCity}><span>city</span> {u.location.city}</div>*/}
                 </div>
               </div>
             </div>

@@ -6,44 +6,36 @@ import style from "./style.module.css";
 import s from "../FormsControl/style.module.css";
 import Button from "../Button";
 import { Field, reduxForm } from "redux-form";
-import { Input } from "../FormsControl";
+import { createField, Input } from "../FormsControl";
 import { required } from "../../utils/validators";
 import Redirect from "react-router-dom/es/Redirect";
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
     <>
-      <form className={style.form} onSubmit={props.handleSubmit}>
+      <form className={style.form} onSubmit={handleSubmit}>
         <div>
           <div>
             <label htmlFor="Email">Email</label>
-            <Field
-              name="email"
-              component={Input}
-              validate={[required]}
-              type="text"
-              placeholder="Login..."
-            />
+            {createField("Login...", "email", [required], "text", Input)}
           </div>
           <div style={{ marginTop: "20px" }}>
             <label htmlFor="password">Password</label>
-            <Field
-              name="password"
-              component={Input}
-              validate={[required]}
-              type="password"
-              placeholder="Password..."
-            />
+            {createField(
+              "Password...",
+              "password",
+              [required],
+              "password",
+              Input
+            )}
           </div>
         </div>
         <div className={style.formControl}>
-          <div>
-            <Field name="rememberMe" component="input" type="checkbox" />
+          <div style={{ display: "flex", alignItems: "first baseline" }}>
+            {createField(null, "rememberMe", null, "checkbox", Input)}
             <label htmlFor="rememberMe">remember me</label>
           </div>
-          {props.error && (
-            <div className={s.formSummaryError}>{props.error}</div>
-          )}
+          {error && <div className={s.formSummaryError}>{error}</div>}
           <div>
             <Button text="Login" />
           </div>
@@ -57,12 +49,12 @@ const LoginReduxForm = reduxForm({
   form: "login",
 })(LoginForm);
 
-const Login = (props) => {
+const Login = ({ login, isAuth }) => {
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe);
+    login(formData.email, formData.password, formData.rememberMe);
   };
 
-  if (props.isAuth) return <Redirect to={"/profile"} />;
+  if (isAuth) return <Redirect to={"/profile"} />;
   return (
     <div className={style.login}>
       <h1>Login</h1>
