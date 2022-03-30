@@ -66,13 +66,10 @@ span {
 
 .usersBtn > button {
   bottom: 0 !important;
-  right: 30px !important;
 }
 
 .paginate {
-  width: 100%;
-  overflow: scroll;
-  height: 30px;
+  margin: 10px;
 }
 
 .paginate > span {
@@ -83,4 +80,21 @@ span {
 
 .padinateSelected {
   color: gold;
+}
+
+.pageNumber {
+  padding: 2px;
+  border: 1px solid grey;
+}
+
+.pageNumber.selectedPage {
+  font-weight: bold;
+  border-color: darkorange;
+}
+
+button {
+  border-radius: 0;
+  padding: 10px ;
+  margin-left: 10px;
+  margin-right: 10px;
 }

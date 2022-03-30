@@ -33,7 +33,7 @@ const Users = ({
       <UsersPaginate
         currentPage={currentPage}
         handleClickPageChanged={handleClickPageChanged}
-        totalUsersCount={totalUsersCount}
+        totalItemsCount={totalUsersCount}
         pageSize={pageSize}
       />
       <div>
