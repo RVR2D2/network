@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import store from "./redux/redux-store";
-import {BrowserRouter} from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import {Provider} from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Provider store={store}>
-        <App/>
+        <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
