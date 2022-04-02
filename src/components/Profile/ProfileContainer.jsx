@@ -5,6 +5,7 @@ import { compose } from "redux";
 import {
   getStatusThunk,
   profileThunk,
+  savePhotoThunk,
   updateStatusThunk,
 } from "../../redux/reducers/profile-reducer";
 import { withRouter } from "react-router-dom";
@@ -12,7 +13,7 @@ import withAuthRedirect from "../../HOC/withAuthRedirect";
 import Profile from "./index";
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId;
@@ -24,13 +25,25 @@ class ProfileContainer extends React.Component {
     this.props.getStatusThunk(userId);
   }
 
+  componentDidMount() {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.match.params.userId !== prevProps) {
+      this.refreshProfile();
+    }
+  }
+
   render() {
     return (
       <Profile
         {...this.props}
+        isOwner={!this.props.match.params.userId}
         profile={this.props.profile}
         status={this.props.status}
         updateStatusThunk={this.props.updateStatusThunk}
+        savePhotoThunk={this.props.savePhotoThunk}
       />
     );
   }
@@ -45,7 +58,12 @@ const mapStateToProps = (state) => {
   };
 };
 export default compose(
-  connect(mapStateToProps, { profileThunk, getStatusThunk, updateStatusThunk }),
+  connect(mapStateToProps, {
+    profileThunk,
+    getStatusThunk,
+    updateStatusThunk,
+    savePhotoThunk,
+  }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer);

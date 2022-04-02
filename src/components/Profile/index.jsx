@@ -8,9 +8,11 @@ const Profile = (props) => {
   return (
     <div className={s.appContent}>
       <ProfileInfo
+        isOwner={props.isOwner}
         profile={props.profile}
         status={props.status}
         updateStatusThunk={props.updateStatusThunk}
+        savePhotoThunk={props.savePhotoThunk}
         img={bg1}
       />
       <div className={s.appContentBody}>

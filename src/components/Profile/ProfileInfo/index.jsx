@@ -3,11 +3,25 @@ import Preloader from "../../Preloader";
 import imgMocUser from "../../../assets/users.png";
 
 import ProfileStatus from "./ProfileStatus";
+import CustomInput from "../../Input";
 
-const ProfileInfo = ({ profile, status, updateStatusThunk, img }) => {
+const ProfileInfo = ({
+  profile,
+  status,
+  updateStatusThunk,
+  img,
+  isOwner,
+  savePhotoThunk,
+}) => {
   if (!profile) {
     return <Preloader />;
   }
+
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      savePhotoThunk(e.target.files[0]);
+    }
+  };
 
   return (
     <div>
@@ -36,6 +50,9 @@ const ProfileInfo = ({ profile, status, updateStatusThunk, img }) => {
             status={status}
             updateStatusThunk={updateStatusThunk}
           />
+          {isOwner && (
+            <CustomInput type="file" onChange={onMainPhotoSelected} />
+          )}
         </div>
       </div>
     </div>
