@@ -13,6 +13,7 @@ const Profile = (props) => {
         status={props.status}
         updateStatusThunk={props.updateStatusThunk}
         savePhotoThunk={props.savePhotoThunk}
+        saveProfile={props.saveProfile}
         img={bg1}
       />
       <div className={s.appContentBody}>

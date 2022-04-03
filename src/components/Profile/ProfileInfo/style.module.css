@@ -13,4 +13,17 @@
 
 .statusMode {
 	cursor: pointer;
+	padding-left: 10px;
+}
+
+.editButton {
+	padding: 10px;
+	background-color: #181d1c;
+	font-size: 16px;
+	border-radius: 10px;
+}
+.formSummaryError {
+	color: #b82e1f;
+	padding-top: 10px;
+	font-weight: bold;
 }

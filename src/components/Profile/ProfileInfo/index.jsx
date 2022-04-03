@@ -1,9 +1,12 @@
+import React, { useState } from "react";
 import s from "./style.module.css";
 import Preloader from "../../Preloader";
 import imgMocUser from "../../../assets/users.png";
 
 import ProfileStatus from "./ProfileStatus";
 import CustomInput from "../../Input";
+import ProfileData from "./ProfileData";
+import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = ({
   profile,
@@ -12,7 +15,10 @@ const ProfileInfo = ({
   img,
   isOwner,
   savePhotoThunk,
+  saveProfile,
 }) => {
+  const [editMode, setEditMode] = useState(false);
+
   if (!profile) {
     return <Preloader />;
   }
@@ -23,33 +29,44 @@ const ProfileInfo = ({
     }
   };
 
+  const onSubmit = (formData) => {
+    saveProfile(formData).then(() => {
+      setEditMode(false);
+    });
+  };
+
   return (
     <div>
       <div className={s.appBgImg}>{/*<img src={img} alt='bg-img'/>*/}</div>
       <div className={s.appAvatarBlock} style={{ display: "flex" }}>
         <img
+          style={{ height: "350px" }}
           src={
             profile.photos.large === null ? imgMocUser : profile.photos.large
           }
           alt={profile.fullName}
         />
         <div style={{ paddingLeft: "20px" }}>
-          <p>{profile.fullName}</p>
-          <p>{profile.aboutMe}</p>
-          <p>{profile.contacts.facebook}</p>
-          <p>{profile.contacts.website}</p>
-          <p>{profile.contacts.vk}</p>
-          <p>{profile.contacts.twitter}</p>
-          <p>{profile.contacts.instagram}</p>
-          <p>{profile.contacts.youtube}</p>
-          <p>{profile.contacts.github}</p>
-          <p>{profile.contacts.mainLink}</p>
-          <p>{profile.lookingForAJob}</p>
-          <p>{profile.lookingForAJobDescription}</p>
-          <ProfileStatus
-            status={status}
-            updateStatusThunk={updateStatusThunk}
-          />
+          {editMode ? (
+            <ProfileDataForm
+              initialValues={profile}
+              profile={profile}
+              onSubmit={onSubmit}
+            />
+          ) : (
+            <ProfileData
+              profile={profile}
+              isOwner={isOwner}
+              goToEditMode={() => setEditMode(true)}
+            />
+          )}
+          <p>
+            status:
+            <ProfileStatus
+              status={status}
+              updateStatusThunk={updateStatusThunk}
+            />
+          </p>
           {isOwner && (
             <CustomInput type="file" onChange={onMainPhotoSelected} />
           )}
