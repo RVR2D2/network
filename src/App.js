@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeApp } from "./redux/reducers/app-reducer";
@@ -37,10 +37,22 @@ class App extends Component {
         <HeaderContainer />
         <SideBar />
         <React.Suspense fallback={<Preloader />}>
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={() => <Login />} />
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/profile" />
+            </Route>
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route
+              path="/profile/:userId?"
+              render={() => <ProfileContainer />}
+            />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={() => <Login />} />
+            <Route
+              path="*"
+              render={() => <h1 style={{ color: "white" }}>404 NOT FOUND</h1>}
+            />
+          </Switch>
         </React.Suspense>
       </div>
     );
