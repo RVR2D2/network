@@ -2,6 +2,7 @@ import React from "react";
 import Users from "./Users";
 
 import { connect } from "react-redux";
+import { AppStateType } from "../../redux/redux-store";
 import {
   follow,
   unfollow,
@@ -18,12 +19,34 @@ import {
   getUsersSuperSelector,
 } from "../../redux/selectors/users";
 
-class UsersComponent extends React.Component {
+type MapStatePropsType = {
+  currentPage: number;
+  pageSize: number;
+  isFetching: boolean;
+  totalUsersCount: number;
+  users: Array<object>;
+  followingInProgress: Array<number>;
+};
+
+type MapDispatchPropsType = {
+  unfollow: (userId: number) => void;
+  follow: (userId: number) => void;
+  toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
+  getUsersThunk: (currentPage: number, pageSize: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
+};
+type OwnPropsType = {
+  pageTitle: string;
+};
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+class UsersComponent extends React.Component<PropsType> {
   componentDidMount() {
     this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
   }
 
-  handleClickPageChanged = (pageNumber) => {
+  handleClickPageChanged = (pageNumber: number) => {
     this.props.getUsersThunk(pageNumber, this.props.pageSize);
     this.props.setCurrentPage(pageNumber);
   };
@@ -45,7 +68,7 @@ class UsersComponent extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     users: getUsersSuperSelector(state),
     pageSize: getPageSizeSelector(state),
@@ -56,7 +79,12 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
+export default connect<
+  MapStatePropsType,
+  MapDispatchPropsType,
+  OwnPropsType,
+  AppStateType
+>(mapStateToProps, {
   follow,
   unfollow,
   setCurrentPage,
