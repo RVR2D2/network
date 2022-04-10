@@ -25,7 +25,8 @@
     "useUnknownInCatchVariables": false
   },
   "include": [
-    "src"
+    "src",
+    "./src/**/*.tsx", "./src/**/*.ts", "./typings/*.ts"
   ],
   "exclude": ["node_modules"]
 }
