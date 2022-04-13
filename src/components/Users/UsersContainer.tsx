@@ -6,8 +6,6 @@ import { AppStateType } from "../../redux/redux-store";
 import {
   follow,
   unfollow,
-  setCurrentPage,
-  toggleFollowingProgress,
   getUsersThunk,
 } from "../../redux/reducers/users-reducer";
 import {
@@ -34,9 +32,6 @@ type MapDispatchPropsType = {
   toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
   getUsersThunk: (currentPage: number, pageSize: number) => void;
   setCurrentPage: (pageNumber: number) => void;
-};
-type OwnPropsType = {
-  pageTitle: string;
 };
 
 type PropsType = MapStatePropsType & MapDispatchPropsType;
@@ -82,12 +77,10 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 export default connect<
   MapStatePropsType,
   MapDispatchPropsType,
-  OwnPropsType,
   AppStateType
+  // @ts-ignore
 >(mapStateToProps, {
   follow,
   unfollow,
-  setCurrentPage,
-  toggleFollowingProgress,
   getUsersThunk,
 })(UsersComponent);

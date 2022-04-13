@@ -23,6 +23,12 @@ export type AppStateType = ReturnType<RootReducer>;
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+type PropertiesType<T> = T extends { [key: string]: infer U } ? U : never;
+
+export type InferActionsTypes<
+  T extends { [key: string]: (...args: any[]) => any }
+> = ReturnType<PropertiesType<T>>;
+
 let store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunkMiddleware))
