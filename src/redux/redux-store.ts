@@ -1,5 +1,11 @@
-import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import {
+  Action,
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+} from "redux";
+import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 
 import profileReducer from "./reducers/profile-reducer";
@@ -28,6 +34,13 @@ type PropertiesType<T> = T extends { [key: string]: infer U } ? U : never;
 export type InferActionsTypes<
   T extends { [key: string]: (...args: any[]) => any }
 > = ReturnType<PropertiesType<T>>;
+
+export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
+  R,
+  AppStateType,
+  unknown,
+  A
+>;
 
 let store = createStore(
   rootReducer,

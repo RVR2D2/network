@@ -1,18 +1,16 @@
-const SEND_MESSAGE = "SEND_MESSAGE";
-
-type InitialStateType = {
-  dialogs: Array<object>;
-  messages: Array<object>;
-};
+import { InferActionsTypes } from "../redux-store";
 
 const initialState: InitialStateType = {
   dialogs: [{ id: 1, name: "Test" }],
   messages: [{ id: 1, message: "hi" }],
 };
 
-const dialogReducer = (state = initialState, action: any): InitialStateType => {
+const dialogReducer = (
+  state = initialState,
+  action: ActionsType
+): InitialStateType => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case "SN/DIALOG/SEND_MESSAGE":
       let body = action.newMessageBody;
       return {
         ...state,
@@ -23,16 +21,18 @@ const dialogReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-type sendMessageCreatorType = {
-  type: typeof SEND_MESSAGE;
-  newMessageBody: string;
+export const actions = {
+  sendMessageCreator: (newMessageBody: string) =>
+    ({
+      type: "SN/DIALOG/SEND_MESSAGE",
+      newMessageBody,
+    } as const),
 };
 
-export const sendMessageCreator = (
-  newMessageBody: string
-): sendMessageCreatorType => ({
-  type: SEND_MESSAGE,
-  newMessageBody,
-});
-
 export default dialogReducer;
+
+type InitialStateType = {
+  dialogs: Array<object>;
+  messages: Array<object>;
+};
+type ActionsType = InferActionsTypes<typeof actions>;
