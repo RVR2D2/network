@@ -1,7 +1,31 @@
 import ProfileContacts from "./ProfileContacts";
+/*@ts-ignore*/
 import s from "./style.module.css";
 
-const ProfileData = ({ profile, isOwner, goToEditMode }) => {
+type PropsType = {
+  profile: ProfileType;
+  status: string;
+  updateStatusThunk: (status: string) => void;
+  isOwner: boolean;
+  savePhotoThunk: (file: File) => void;
+  saveProfile: (profile: Array<object>) => Promise<any>;
+  goToEditMode: () => void;
+};
+
+type ProfileType = {
+  photos: { large: string };
+  aboutMe: string;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: object;
+};
+
+const ProfileData: React.FC<PropsType> = ({
+  profile,
+  isOwner,
+  goToEditMode,
+}) => {
   return (
     <>
       {isOwner && (
@@ -22,7 +46,7 @@ const ProfileData = ({ profile, isOwner, goToEditMode }) => {
             <ProfileContacts
               key={key}
               contactsTitle={key}
-              contactsValue={profile.contacts[key]}
+              contactsValue={profile.contacts[key as keyof object]}
             />
           );
         })}

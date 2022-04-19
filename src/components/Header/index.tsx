@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
-
+// @ts-ignore
 import s from "./style.module.css";
+// @ts-ignore
 import logo from "../../assets/og.png";
+import React from "react";
 
-const Header = (props) => {
+type PropsType = {
+  isAuth: boolean;
+  login: () => void;
+  logout: () => void;
+};
+
+const Header: React.FC<PropsType> = (props) => {
   return (
     <div className={s.appContainerHeader}>
       <header className={s.appHeader}>

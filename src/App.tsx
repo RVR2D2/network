@@ -10,19 +10,25 @@ import HeaderContainer from "./components/Header/headerContainer";
 import SideBar from "./components/SideBar";
 import Login from "./components/Login";
 import Preloader from "./components/Preloader";
+import { AppStateType } from "./redux/redux-store";
 
-const ProfileContainer = React.lazy(() =>
-  import("./components/Profile/ProfileContainer")
+const ProfileContainer = React.lazy(
+  () => import("./components/Profile/ProfileContainer")
 );
-const DialogsContainer = React.lazy(() =>
-  import("./components/Dialogs/DialogsContainer")
-);
-
-const UsersContainer = React.lazy(() =>
-  import("./components/Users/UsersContainer")
+const DialogsContainer = React.lazy(
+  () => import("./components/Dialogs/DialogsContainer")
 );
 
-class App extends Component {
+const UsersContainer = React.lazy(
+  () => import("./components/Users/UsersContainer")
+);
+
+type MapPropsType = ReturnType<typeof mapStateToProps>;
+type DispatchPropsType = {
+  initializeApp: () => void;
+};
+
+class App extends Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -46,6 +52,7 @@ class App extends Component {
               path="/profile/:userId?"
               render={() => <ProfileContainer />}
             />
+            {/*@ts-ignore*/}
             <Route path="/users" render={() => <UsersContainer />} />
             <Route path="/login" render={() => <Login />} />
             <Route
@@ -59,7 +66,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
 });
 

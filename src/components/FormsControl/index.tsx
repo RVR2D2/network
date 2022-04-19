@@ -57,3 +57,5 @@ export function createField<FormKeyType extends string>(
     />
   );
 }
+
+export type GetStringKeys<T> = Extract<keyof T, string>;

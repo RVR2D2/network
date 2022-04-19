@@ -1,3 +1,4 @@
+// @ts-ignore
 import s from "./style.module.css";
 import { NavLink } from "react-router-dom";
 

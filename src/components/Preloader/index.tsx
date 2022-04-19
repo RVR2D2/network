@@ -1,6 +1,6 @@
-import React from "react";
-
+// @ts-ignore
 import s from "./style.module.css";
+// @ts-ignore
 import loader from "../../assets/loading.svg";
 
 const Preloader = () => {

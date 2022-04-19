@@ -1,10 +1,24 @@
 import React from "react";
+/*@ts-ignore*/
 import s from "./style.module.css";
 import { NavLink } from "react-router-dom";
+// @ts-ignore
 import imgMocUser from "../../assets/users.png";
 import Button from "../Button";
 
-const User = ({ followingInProgress, unfollow, follow, user }) => {
+type PropsType = {
+  user: any;
+  follow: (id: number) => void;
+  unfollow: (id: number) => void;
+  followingInProgress: Array<number>;
+};
+
+const User: React.FC<PropsType> = ({
+  followingInProgress,
+  unfollow,
+  follow,
+  user,
+}) => {
   return (
     <div className={s.usersWrapper} key={user.id}>
       <div>
@@ -20,7 +34,9 @@ const User = ({ followingInProgress, unfollow, follow, user }) => {
         <div className={s.usersBtn}>
           {user.followed ? (
             <Button
-              disabled={followingInProgress.some((id) => id === user.id)}
+              disabled={followingInProgress.some(
+                (id: number) => id === user.id
+              )}
               onClick={() => {
                 unfollow(user.id);
               }}
@@ -28,7 +44,9 @@ const User = ({ followingInProgress, unfollow, follow, user }) => {
             />
           ) : (
             <Button
-              disabled={followingInProgress.some((id) => id === user.id)}
+              disabled={followingInProgress.some(
+                (id: number) => id === user.id
+              )}
               onClick={() => {
                 follow(user.id);
               }}

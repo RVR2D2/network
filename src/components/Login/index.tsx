@@ -8,7 +8,7 @@ import style from "./style.module.css";
 import s from "../FormsControl/style.module.css";
 import Button from "../Button";
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { createField, Input } from "../FormsControl";
+import { createField, GetStringKeys, Input } from "../FormsControl";
 import { required } from "../../utils/validators";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from "../../redux/redux-store";
@@ -67,7 +67,7 @@ const LoginForm: React.FC<
             )}
           {error && <div className={s.formSummaryError}>{error}</div>}
           <div>
-            <Button text="Login" onClick={() => {}} />
+            <Button text="Login" onClick={() => {}} disabled />
           </div>
         </div>
       </form>
@@ -100,7 +100,7 @@ type LoginFormValuesType = {
   captcha: string;
 };
 
-type LoginFormValuesTypesKey = keyof LoginFormValuesType;
+type LoginFormValuesTypesKey = GetStringKeys<LoginFormValuesType>;
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = ({
   login,

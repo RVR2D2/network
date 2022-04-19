@@ -1,10 +1,25 @@
+// @ts-ignore
 import s from "./style.module.css";
-import bg1 from "../../assets/bg1.jpeg";
 import ProfileInfo from "./ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
-import React from "react";
 
-const Profile = (props) => {
+type PropsType = {
+  isOwner: boolean;
+  profile: {
+    photos: { large: string };
+    aboutMe: string;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    contacts: object;
+  };
+  status: string;
+  updateStatusThunk: (status: string) => void;
+  savePhotoThunk: (file: File) => void;
+  saveProfile: (profile: object[]) => Promise<any>;
+};
+
+const Profile: React.FC<PropsType> = (props) => {
   return (
     <div className={s.appContent}>
       <ProfileInfo
@@ -14,7 +29,6 @@ const Profile = (props) => {
         updateStatusThunk={props.updateStatusThunk}
         savePhotoThunk={props.savePhotoThunk}
         saveProfile={props.saveProfile}
-        img={bg1}
       />
       <div className={s.appContentBody}>
         <MyPostContainer />
