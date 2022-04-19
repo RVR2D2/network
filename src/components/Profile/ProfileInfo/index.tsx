@@ -89,6 +89,7 @@ const ProfileInfo: React.FC<PropsType> = ({
             />
           </p>
           {isOwner && (
+            // @ts-ignore
             <CustomInput type="file" onChange={onMainPhotoSelected} />
           )}
         </div>
