@@ -7,6 +7,7 @@ import {
   follow,
   unfollow,
   getUsersThunk,
+  FilterType,
 } from "../../redux/reducers/users-reducer";
 import {
   getCurrentPageSelector,
@@ -14,6 +15,7 @@ import {
   getIsFetchingSelector,
   getPageSizeSelector,
   getTotalUsersCountSelector,
+  getUsersFilter,
   getUsersSuperSelector,
 } from "../../redux/selectors/users";
 
@@ -24,13 +26,18 @@ type MapStatePropsType = {
   totalUsersCount: number;
   users: Array<object>;
   followingInProgress: Array<number>;
+  filter: FilterType;
 };
 
 type MapDispatchPropsType = {
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
   toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
-  getUsersThunk: (currentPage: number, pageSize: number) => void;
+  getUsersThunk: (
+    currentPage: number,
+    pageSize: number,
+    filter: FilterType
+  ) => void;
   setCurrentPage: (pageNumber: number) => void;
 };
 
@@ -38,12 +45,24 @@ type PropsType = MapStatePropsType & MapDispatchPropsType;
 
 class UsersComponent extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+    this.props.getUsersThunk(
+      this.props.currentPage,
+      this.props.pageSize,
+      this.props.filter
+    );
   }
 
   handleClickPageChanged = (pageNumber: number) => {
-    this.props.getUsersThunk(pageNumber, this.props.pageSize);
+    this.props.getUsersThunk(
+      pageNumber,
+      this.props.pageSize,
+      this.props.filter
+    );
     this.props.setCurrentPage(pageNumber);
+  };
+
+  onFilterChanged = (filter: FilterType) => {
+    this.props.getUsersThunk(1, this.props.pageSize, filter);
   };
 
   render() {
@@ -58,6 +77,7 @@ class UsersComponent extends React.Component<PropsType> {
         unfollow={this.props.unfollow}
         isFetching={this.props.isFetching}
         followingInProgress={this.props.followingInProgress}
+        onFilterChanged={this.onFilterChanged}
       />
     );
   }
@@ -71,6 +91,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     currentPage: getCurrentPageSelector(state),
     isFetching: getIsFetchingSelector(state),
     followingInProgress: getFollowingInProgressSelector(state),
+    filter: getUsersFilter(state),
   };
 };
 

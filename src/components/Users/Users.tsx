@@ -3,6 +3,8 @@ import Preloader from "../Preloader";
 // import s from "./style.module.css";
 import UsersPaginate from "../Paginate/UsersPaginate";
 import User from "./User";
+import { UsersSearchForm } from "./UsersSearchForm";
+import { FilterType } from "../../redux/reducers/users-reducer";
 
 type PropsType = {
   pageSize: number;
@@ -10,6 +12,7 @@ type PropsType = {
   users: Array<any>;
   currentPage: number;
   handleClickPageChanged: (pageNumber: number) => void;
+  onFilterChanged: (filter: FilterType) => void;
   followingInProgress: Array<number>;
   unfollow: (usersId: number) => void;
   follow: (usersId: number) => void;
@@ -26,6 +29,7 @@ const Users: React.FC<PropsType> = ({
   unfollow,
   follow,
   isFetching,
+  onFilterChanged,
 }) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const pages = [];
@@ -38,6 +42,7 @@ const Users: React.FC<PropsType> = ({
     <div>
       <h3>Users</h3>
       {isFetching ? <Preloader /> : null}
+      <UsersSearchForm onFilterChanged={onFilterChanged} />
       <UsersPaginate
         currentPage={currentPage}
         handleClickPageChanged={handleClickPageChanged}

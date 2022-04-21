@@ -11,6 +11,10 @@ let initialState: initialStateType = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [],
+  filter: {
+    term: "",
+    friend: null,
+  },
 };
 
 const usersReducer = (
@@ -43,6 +47,9 @@ const usersReducer = (
     }
     case "TOGGLE_IS_FETCHING": {
       return { ...state, isFetching: action.isFetching };
+    }
+    case "SET_FILTER": {
+      return { ...state, filter: action.payload };
     }
     case "TOGGLE_IS_FOLLOWING_PROGRESS": {
       return {
@@ -78,6 +85,11 @@ export const actions = {
       type: "SET_CURRENT_PAGE",
       currentPage,
     } as const),
+  setFilter: (filter: FilterType) =>
+    ({
+      type: "SET_FILTER",
+      payload: filter,
+    } as const),
   setTotalUsersCount: (count: number) =>
     ({
       type: "SET_TOTAL_USERS_COUNT",
@@ -98,14 +110,21 @@ export const actions = {
 
 export const getUsersThunk = (
   currentPage: number,
-  pageSize: number
+  pageSize: number,
+  filter: FilterType
 ): ThunkType => {
   return async (dispatch, getState) => {
     dispatch(actions.toggleIsFetching(true));
-    let response = await usersApi.getUsers(currentPage, pageSize);
+    let response = await usersApi.getUsers(
+      currentPage,
+      pageSize,
+      filter.term,
+      filter.friend
+    );
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(response.items));
     dispatch(actions.setTotalUsersCount(response.totalCount));
+    dispatch(actions.setFilter(filter));
   };
 };
 
@@ -153,6 +172,11 @@ export type initialStateType = {
   currentPage: number;
   isFetching: boolean;
   followingInProgress: any[];
+  filter: {
+    term: string;
+    friend: null | boolean;
+  };
 };
+export type FilterType = typeof initialState.filter;
 type ThunkType = BaseThunkType<ActionsType>;
 type ActionsType = InferActionsTypes<typeof actions>;
