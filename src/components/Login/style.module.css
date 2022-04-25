@@ -29,19 +29,19 @@ button {
     margin-top: 10px;
 }
 
-input {
-    margin-top: 10px;
-    padding: 5px;
-    border-radius: 8px;
-    line-height: 2;
-    cursor: pointer;
-    transition: .5s;
+/*input {*/
+/*    margin-top: 10px;*/
+/*    padding: 5px;*/
+/*    border-radius: 8px;*/
+/*    line-height: 2;*/
+/*    cursor: pointer;*/
+/*    transition: .5s;*/
 
-    color: #000000;
-    font-size: 16px;
-    font-weight: 500;
-    border: 3px solid #EAEAEA;
-}
+/*    color: #000000;*/
+/*    font-size: 16px;*/
+/*    font-weight: 500;*/
+/*    border: 3px solid #EAEAEA;*/
+/*}*/
 
 input:hover {
     border-color: #494949;

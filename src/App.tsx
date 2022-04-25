@@ -8,7 +8,7 @@ import { initializeApp } from "./redux/reducers/app-reducer";
 import "./App.css";
 import HeaderContainer from "./components/Header/headerContainer";
 import SideBar from "./components/SideBar";
-import Login from "./components/Login";
+import { LoginPage } from "./components/Login";
 import Preloader from "./components/Preloader";
 import { AppStateType } from "./redux/redux-store";
 
@@ -19,10 +19,7 @@ const DialogsContainer = React.lazy(
   () => import("./components/Dialogs/DialogsContainer")
 );
 
-const UsersContainer = React.lazy(
-  () => import("./components/Users/UsersContainer")
-);
-
+const UsersPage = React.lazy(() => import("./components/Users/UsersPage"));
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
   initializeApp: () => void;
@@ -53,8 +50,8 @@ class App extends Component<MapPropsType & DispatchPropsType> {
               render={() => <ProfileContainer />}
             />
             {/*@ts-ignore*/}
-            <Route path="/users" render={() => <UsersContainer />} />
-            <Route path="/login" render={() => <Login />} />
+            <Route path="/users" render={() => <UsersPage />} />
+            <Route path="/login" render={() => <LoginPage />} />
             <Route
               path="*"
               render={() => <h1 style={{ color: "white" }}>404 NOT FOUND</h1>}

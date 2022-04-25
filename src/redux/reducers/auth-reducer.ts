@@ -61,7 +61,7 @@ export const login =
     email: string,
     password: string,
     rememberMe: boolean,
-    captcha: null
+    captcha: string
   ): ThunkType =>
   async (dispatch) => {
     let loginData = await authApi.login(email, password, rememberMe, captcha);

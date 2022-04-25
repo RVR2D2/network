@@ -1,36 +1,62 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  FilterType,
+  follow,
+  getUsersThunk,
+  unfollow,
+} from "../../redux/reducers/users-reducer";
+import {
+  getCurrentPageSelector,
+  getFollowingInProgressSelector,
+  getIsFetchingSelector,
+  getPageSizeSelector,
+  getTotalUsersCountSelector,
+  getUsersFilter,
+  getUsersSuperSelector,
+} from "../../redux/selectors/users";
+
 import Preloader from "../Preloader";
-// import s from "./style.module.css";
 import UsersPaginate from "../Paginate/UsersPaginate";
 import User from "./User";
 import { UsersSearchForm } from "./UsersSearchForm";
-import { FilterType } from "../../redux/reducers/users-reducer";
 
-type PropsType = {
-  pageSize: number;
-  totalUsersCount: number;
-  users: Array<any>;
-  currentPage: number;
-  handleClickPageChanged: (pageNumber: number) => void;
-  onFilterChanged: (filter: FilterType) => void;
-  followingInProgress: Array<number>;
-  unfollow: (usersId: number) => void;
-  follow: (usersId: number) => void;
-  isFetching: any;
-};
+export const Users: React.FC = () => {
+  // Effect
+  React.useEffect(() => {
+    dispatch(getUsersThunk(1, pageSize, filter));
+  }, []);
 
-const Users: React.FC<PropsType> = ({
-  currentPage,
-  totalUsersCount,
-  pageSize,
-  handleClickPageChanged,
-  users,
-  followingInProgress,
-  unfollow,
-  follow,
-  isFetching,
-  onFilterChanged,
-}) => {
+  // Selectors
+  const totalUsersCount = useSelector(getTotalUsersCountSelector);
+  const currentPage = useSelector(getCurrentPageSelector);
+  const pageSize = useSelector(getPageSizeSelector);
+  const filter = useSelector(getUsersFilter);
+
+  const isFetching = useSelector(getIsFetchingSelector);
+  const users = useSelector(getUsersSuperSelector);
+  const followingInProgress = useSelector(getFollowingInProgressSelector);
+
+  // Dispatch
+  const dispatch = useDispatch();
+
+  const handleClickPageChanged = (pageNumber: number) => {
+    dispatch(getUsersThunk(pageNumber, pageSize, filter));
+  };
+
+  const onFilterChanged = (filter: FilterType) => {
+    dispatch(getUsersThunk(1, pageSize, filter));
+  };
+
+  const unfollows = (usersId: number) => {
+    dispatch(unfollow(usersId));
+  };
+
+  const follows = (usersId: number) => {
+    dispatch(follow(usersId));
+  };
+
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const pages = [];
 
@@ -56,13 +82,11 @@ const Users: React.FC<PropsType> = ({
               user={u}
               key={u.id}
               followingInProgress={followingInProgress}
-              follow={follow}
-              unfollow={unfollow}
+              follow={follows}
+              unfollow={unfollows}
             />
           ))}
       </div>
     </div>
   );
 };
-
-export default Users;
