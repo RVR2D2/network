@@ -1,25 +1,59 @@
-import React from 'react';
-import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
+import React from "react";
+import Avatar from "antd/lib/avatar/avatar";
+import { UserOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+import { Button, Layout } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrentUserLogin,
+  selectIsAuth,
+} from "../../redux/auth-selectors";
+import { logout } from "../../redux/auth-reducer";
 
-export type MapPropsType = {
-    isAuth: boolean
-    login: string | null
-}
-export type DispatchPropsType = {
-    logout: () => void
-}
+const { Header } = Layout;
 
-const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
-    return <header className={s.header}>
-        <img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' />
+const AppHeader: React.FC = (props) => {
+  const isAuth = useSelector(selectIsAuth);
+  const login = useSelector(selectCurrentUserLogin);
 
-        <div className={s.loginBlock}>
-            { props.isAuth
-                ? <div>{props.login} - <button onClick={props.logout}>Log out</button> </div>
-                : <NavLink to={'/login'}>Login</NavLink> }
-        </div>
-    </header>
-}
+  const dispatch = useDispatch();
 
-export default Header;
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  return (
+    <Header
+      // @ts-ignore
+      className="site-layout-background"
+      style={{
+        padding: "20px",
+        display: " flex",
+        justifyContent: "flex-end",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {isAuth ? (
+          <div>
+            <Avatar
+              style={{ backgroundColor: "#87d068", marginRight: "5px" }}
+              icon={<UserOutlined />}
+            />
+            {login}{" "}
+            <Button
+              type="primary"
+              icon={<PoweroffOutlined />}
+              onClick={handleLogout}
+              style={{ marginLeft: "5px" }}
+            />
+          </div>
+        ) : (
+          <NavLink to={"/login"}>Login</NavLink>
+        )}
+      </div>
+    </Header>
+  );
+};
+
+export default AppHeader;
