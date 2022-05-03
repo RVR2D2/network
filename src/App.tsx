@@ -16,7 +16,7 @@ import { compose } from "redux";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store, { AppStateType } from "./redux/redux-store";
-import { withSuspense } from "./hoc/withSuspense";
+import { withSuspense } from "./HOC/withSuspense";
 import { UsersPage } from "./components/Users/UsersContainer";
 
 import { Layout, Menu, Breadcrumb, MenuProps } from "antd";
@@ -24,6 +24,7 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   UserOutlined,
+  WechatOutlined,
 } from "@ant-design/icons";
 import logo from "./logo.svg";
 import AppHeader from "components/Header/Header";
@@ -59,6 +60,10 @@ const items: MenuItem[] = [
     <UserOutlined />,
     <Link style={{ paddingLeft: "10px" }} to="/users" />,
   ]),
+  getItem("Chat", "3", [
+    <WechatOutlined />,
+    <Link style={{ paddingLeft: "10px" }} to="/chat" />,
+  ]),
 ];
 
 const DialogsContainer = React.lazy(
@@ -67,6 +72,7 @@ const DialogsContainer = React.lazy(
 const ProfileContainer = React.lazy(
   () => import("./components/Profile/ProfileContainer")
 );
+const Chat = React.lazy(() => import("./pages/Chat"));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
@@ -75,6 +81,7 @@ type DispatchPropsType = {
 
 const SuspendedDialogs = withSuspense(DialogsContainer);
 const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedChat = withSuspense(Chat);
 
 class App extends Component<MapPropsType & DispatchPropsType> {
   catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
@@ -147,6 +154,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                   path="/users"
                   render={() => <UsersPage pageTitle={"Самураи"} />}
                 />
+                <Route path="/chat" render={() => <SuspendedChat />} />
                 <Route path="/login" render={() => <LoginPage />} />
                 <Route path="*" render={() => <div>404 NOT FOUND</div>} />
               </Switch>
