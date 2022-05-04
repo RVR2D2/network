@@ -1,15 +1,28 @@
 import React from "react";
 import { Button } from "antd";
-import { ws } from "utils/socket";
 
-const ChatMessageForm: React.FC = () => {
+const ChatMessageForm: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
   const [message, setMessage] = React.useState("");
+  const [readyStatus, setReadyStatus] = React.useState<"pending" | "ready">(
+    "pending"
+  );
+
+  React.useEffect(() => {
+    let openHandler = () => {
+      setReadyStatus("ready");
+    };
+    ws?.addEventListener("open", openHandler);
+
+    return () => {
+      ws?.removeEventListener("open", openHandler);
+    };
+  }, [ws]);
 
   const sendMessageHandler = () => {
     if (!message) {
       return;
     }
-    ws.send(message);
+    ws?.send(message);
     setMessage("");
   };
 
@@ -22,7 +35,12 @@ const ChatMessageForm: React.FC = () => {
         ></textarea>
       </div>
       <div>
-        <Button onClick={sendMessageHandler}>Send</Button>
+        <Button
+          disabled={ws === null || readyStatus !== "ready"}
+          onClick={sendMessageHandler}
+        >
+          Send
+        </Button>
       </div>
     </div>
   );
