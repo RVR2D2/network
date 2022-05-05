@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "antd/lib/avatar/avatar";
-import { ChatMessageType } from "./ChatMessages";
+import { ChatMessageType } from "api/chat-api";
 
 const ChatMessage: React.FC<{ message: ChatMessageType }> = ({ message }) => {
   return (

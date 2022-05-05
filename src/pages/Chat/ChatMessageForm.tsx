@@ -1,28 +1,18 @@
 import React from "react";
 import { Button } from "antd";
+import { useDispatch } from "react-redux";
+import { sendMessagesThunk } from "../../redux/chat-reducer";
 
-const ChatMessageForm: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
+const ChatMessageForm: React.FC = () => {
   const [message, setMessage] = React.useState("");
-  const [readyStatus, setReadyStatus] = React.useState<"pending" | "ready">(
-    "pending"
-  );
 
-  React.useEffect(() => {
-    let openHandler = () => {
-      setReadyStatus("ready");
-    };
-    ws?.addEventListener("open", openHandler);
-
-    return () => {
-      ws?.removeEventListener("open", openHandler);
-    };
-  }, [ws]);
+  const dispatch = useDispatch();
 
   const sendMessageHandler = () => {
     if (!message) {
       return;
     }
-    ws?.send(message);
+    dispatch(sendMessagesThunk(message));
     setMessage("");
   };
 
@@ -35,12 +25,7 @@ const ChatMessageForm: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
         ></textarea>
       </div>
       <div>
-        <Button
-          disabled={ws === null || readyStatus !== "ready"}
-          onClick={sendMessageHandler}
-        >
-          Send
-        </Button>
+        <Button onClick={sendMessageHandler}>Send</Button>
       </div>
     </div>
   );
