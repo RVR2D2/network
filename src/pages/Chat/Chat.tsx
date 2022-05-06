@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   startMessagesListeningThunk,
   stopMessagesListeningThunk,
@@ -7,9 +7,11 @@ import {
 
 import ChatMessages from "./ChatMessages";
 import ChatMessageForm from "./ChatMessageForm";
+import { AppStateType } from "../../redux/redux-store";
 
 const Chat: React.FC = () => {
   const dispatch = useDispatch();
+  const status = useSelector((state: AppStateType) => state.chat.status);
 
   React.useEffect(() => {
     dispatch(startMessagesListeningThunk());
@@ -20,6 +22,8 @@ const Chat: React.FC = () => {
 
   return (
     <div>
+      {/*@ts-ignore*/}
+      {status === "error" && alert("Error. Pleas refresh page")}
       <ChatMessages />
       <ChatMessageForm />
     </div>

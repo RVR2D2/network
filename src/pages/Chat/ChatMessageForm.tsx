@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendMessagesThunk } from "../../redux/chat-reducer";
+import { AppStateType } from "../../redux/redux-store";
 
 const ChatMessageForm: React.FC = () => {
   const [message, setMessage] = React.useState("");
 
   const dispatch = useDispatch();
+  const status = useSelector((state: AppStateType) => state.chat.status);
 
   const sendMessageHandler = () => {
     if (!message) {
@@ -25,7 +27,9 @@ const ChatMessageForm: React.FC = () => {
         ></textarea>
       </div>
       <div>
-        <Button onClick={sendMessageHandler}>Send</Button>
+        <Button disabled={status !== "ready"} onClick={sendMessageHandler}>
+          Send
+        </Button>
       </div>
     </div>
   );
